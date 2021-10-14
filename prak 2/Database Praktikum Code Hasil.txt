@@ -1,0 +1,160 @@
+Setting environment for using XAMPP for Windows.
+Acer-PC@DESKTOP-0QHCD2Q c:\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 2
+Server version: 10.1.38-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> create database praktikum
+    -> ;
+Query OK, 1 row affected (0.13 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| akademik           |
+| bebas              |
+| db_meuble          |
+| db_pmob            |
+| desa               |
+| information_schema |
+| jadwalkuliah       |
+| malasngoding       |
+| mtp                |
+| mysql              |
+| performance_schema |
+| perpustakaan       |
+| phpmyadmin         |
+| pmob10             |
+| praktikum          |
+| test               |
++--------------------+
+16 rows in set (0.21 sec)
+
+MariaDB [(none)]> use praktikum;
+Database changed
+MariaDB [praktikum]> CREAT TABLE transaksi (
+    -> id int NOT NULL AUTO_INCREMENT,
+    -> username varchar(255) NOT NULL,
+    -> password varchar(255) NOT NULL,
+    -> tanggal_lahir date,
+    -> jumlah_transaksi int(11),
+    -> total_transaksi int(20),
+    -> PRIMARY KEY(id));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'CREAT TABLE transaksi (
+id int NOT NULL AUTO_INCREMENT,
+username varchar(255) NO' at line 1
+MariaDB [praktikum]> CREATE TABLE transaksi (
+    -> id int NOT NULL AUTO_INCREMENT,
+    -> username varchar(255) NOT NULL,
+    -> password varchar(255) NOT NULL,
+    -> tanggal_lahir date,
+    -> jumlah_transaksi int(11),
+    -> total_transaksi int(20),
+    -> PRIMARY KEY(id));
+Query OK, 0 rows affected (0.53 sec)
+
+MariaDB [praktikum]> show tables;
++---------------------+
+| Tables_in_praktikum |
++---------------------+
+| transaksi           |
++---------------------+
+1 row in set (0.03 sec)
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (1,'Aris','dndiffn4','1987-09-09',6,10000);
+Query OK, 1 row affected (0.13 sec)
+
+MariaDB [praktikum]> UPDATE transaksi SET
+    -> username = 'Admin'
+    -> where id = 1;
+Query OK, 1 row affected (0.11 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [praktikum]> DELETE FROM transaksi;
+Query OK, 1 row affected (0.11 sec)
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (1,'Aris','dndiffn4','1987-09-09',6,10000);
+Query OK, 1 row affected (0.09 sec)
+
+MariaDB [praktikum]> select * from transaksi;
++----+----------+----------+---------------+------------------+-----------------+
+| id | username | password | tanggal_lahir | jumlah_transaksi | total_transaksi |
++----+----------+----------+---------------+------------------+-----------------+
+|  1 | Aris     | dndiffn4 | 1987-09-09    |                6 |           10000 |
++----+----------+----------+---------------+------------------+-----------------+
+1 row in set (0.00 sec)
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (2,'Budi','97ad4erd','1994-01-01',0,0)
+    -> (3,'Charlie','548794655','1965-12-06',25,312150)
+    -> (4,'Daniel','flkh947hf','1980-04-24',3,0);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '(3,'Charlie','548794655','1965-12-06',25,312150)
+(4,'Daniel','flkh947hf','1980-0' at line 3
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (2,'Budi','97ad4erd','1994-01-01',0,0);
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (3,'Charlie','548794655','1965-12-06',25,312150);
+Query OK, 1 row affected (0.17 sec)
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (4,'Daniel','flkh947hf','1980-04-24',3,0);
+Query OK, 1 row affected (0.08 sec)
+
+MariaDB [praktikum]> select * from transaksi;
++----+----------+-----------+---------------+------------------+-----------------+
+| id | username | password  | tanggal_lahir | jumlah_transaksi | total_transaksi |
++----+----------+-----------+---------------+------------------+-----------------+
+|  1 | Aris     | dndiffn4  | 1987-09-09    |                6 |           10000 |
+|  2 | Budi     | 97ad4erd  | 1994-01-01    |                0 |               0 |
+|  3 | Charlie  | 548794655 | 1965-12-06    |               25 |          312150 |
+|  4 | Daniel   | flkh947hf | 1980-04-24    |                3 |               0 |
++----+----------+-----------+---------------+------------------+-----------------+
+4 rows in set (0.00 sec)
+
+MariaDB [praktikum]> select * from user
+    -> where total_transaksi=0;
+ERROR 1146 (42S02): Table 'praktikum.user' doesn't exist
+MariaDB [praktikum]> select * from transaksi
+    -> where total_transaksi=0;
++----+----------+-----------+---------------+------------------+-----------------+
+| id | username | password  | tanggal_lahir | jumlah_transaksi | total_transaksi |
++----+----------+-----------+---------------+------------------+-----------------+
+|  2 | Budi     | 97ad4erd  | 1994-01-01    |                0 |               0 |
+|  4 | Daniel   | flkh947hf | 1980-04-24    |                3 |               0 |
++----+----------+-----------+---------------+------------------+-----------------+
+2 rows in set (0.04 sec)
+
+MariaDB [praktikum]> select * from transaksi
+    -> where jumlah_transaksi <10 and total_transaksi>10000;
+Empty set (0.03 sec)
+
+MariaDB [praktikum]> select sum(total_transaksi) AS total from transaksi;
++--------+
+| total  |
++--------+
+| 322150 |
++--------+
+1 row in set (0.04 sec)
+
+MariaDB [praktikum]> select * from transaksi
+    -> order by jumlah_transaksi desc;
++----+----------+-----------+---------------+------------------+-----------------+
+| id | username | password  | tanggal_lahir | jumlah_transaksi | total_transaksi |
++----+----------+-----------+---------------+------------------+-----------------+
+|  3 | Charlie  | 548794655 | 1965-12-06    |               25 |          312150 |
+|  1 | Aris     | dndiffn4  | 1987-09-09    |                6 |           10000 |
+|  4 | Daniel   | flkh947hf | 1980-04-24    |                3 |               0 |
+|  2 | Budi     | 97ad4erd  | 1994-01-01    |                0 |               0 |
++----+----------+-----------+---------------+------------------+-----------------+
+4 rows in set (0.05 sec)

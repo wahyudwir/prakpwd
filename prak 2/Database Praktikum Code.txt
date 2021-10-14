@@ -1,0 +1,50 @@
+MariaDB [(none)]> create database praktikum
+    -> ;
+
+MariaDB [(none)]> show databases;
+
+MariaDB [(none)]> use praktikum;
+
+MariaDB [praktikum]> CREATE TABLE transaksi (
+    -> id int NOT NULL AUTO_INCREMENT,
+    -> username varchar(255) NOT NULL,
+    -> password varchar(255) NOT NULL,
+    -> tanggal_lahir date,
+    -> jumlah_transaksi int(11),
+    -> total_transaksi int(20),
+    -> PRIMARY KEY(id));
+
+MariaDB [praktikum]> show tables;
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (1,'Aris','dndiffn4','1987-09-09',6,10000);
+
+MariaDB [praktikum]> UPDATE transaksi SET
+    -> username = 'Admin'
+    -> where id = 1;
+
+MariaDB [praktikum]> DELETE FROM transaksi;
+
+MariaDB [praktikum]> select * from transaksi;
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (2,'Budi','97ad4erd','1994-01-01',0,0);
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (3,'Charlie','548794655','1965-12-06',25,312150);
+
+MariaDB [praktikum]> INSERT INTO transaksi VALUES
+    -> (4,'Daniel','flkh947hf','1980-04-24',3,0);
+
+MariaDB [praktikum]> select * from transaksi;
+
+MariaDB [praktikum]> select * from user
+    -> where total_transaksi=0;
+
+MariaDB [praktikum]> select * from transaksi
+    -> where jumlah_transaksi <10 and total_transaksi>10000;
+
+MariaDB [praktikum]> select sum(total_transaksi) AS total from transaksi;
+
+MariaDB [praktikum]> select * from transaksi
+    -> order by jumlah_transaksi desc;
